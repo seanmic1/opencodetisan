@@ -12,11 +12,9 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-  PopoverArrow,
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
-  useControllableState,
 } from '@chakra-ui/react'
 import {
   HamburgerIcon,
@@ -29,7 +27,7 @@ export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure()
 
   return (
-    <Box>
+    <Box position={'fixed'} w={'100%'}>
       <Flex
         bg={useColorModeValue('white', 'black')}
         color={useColorModeValue('gray.600', 'white')}
@@ -39,7 +37,14 @@ export default function Navbar() {
         borderBottom={1}
         borderStyle={'solid'}
         borderColor={useColorModeValue('gray.200', 'gray.900')}
-        align={'center'}>
+        align={'center'}
+        style={{
+          background : 'rgba(0, 0, 0, 0.44)',
+          boxShadow : '0 4px 30px rgba(0, 0, 0, 0.1)',
+          backdropFilter : 'blur(5px)',
+          WebkitBackdropFilter : 'blur(5px)'
+        }}
+        >
         <Flex
           flex={{ base: 1, md: 'auto' }}
           ml={{ base: -2 }}
