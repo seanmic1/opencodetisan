@@ -11,15 +11,21 @@
     "test:integration": "./scripts/run-integration-test.sh"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.1.0",
+    "@chakra-ui/next-js": "^2.1.5",
+    "@chakra-ui/react": "^2.8.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@prisma/client": "5.0.0",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.9",
     "fflate": "^0.8.0",
-    "glob": "^10.3.3",
+    "framer-motion": "^10.16.2",
+    "glob": "^10.3.4",
     "mailersend": "^2.2.0",
-    "next": "13.4.9",
+    "next": "^13.4.9",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
