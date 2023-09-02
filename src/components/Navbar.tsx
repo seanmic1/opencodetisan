@@ -12,9 +12,11 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
+  PopoverArrow,
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
+  useControllableState,
 } from '@chakra-ui/react'
 import {
   HamburgerIcon,
@@ -101,22 +103,33 @@ const DesktopNav = () => {
   return (
     <Stack direction={'row'} spacing={4}>
       {NAV_ITEMS.map((navItem) => (
-        <Box key={navItem.label}>
+        <Box key={navItem.label} className=''>
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
-              <Box
-                as="a"
-                p={2}
-                href={navItem.href ?? '#'}
-                fontSize={'sm'}
-                fontWeight={500}
-                color={linkColor}
-                _hover={{
-                  textDecoration: 'none',
-                  color: linkHoverColor,
-                }}>
-                {navItem.label}
-              </Box>
+              <Stack direction={'row'} align={'center'}>
+                <Box
+                  as="a"
+                  p={2}
+                  href={navItem.href ?? '#'}
+                  fontSize={'sm'}
+                  fontWeight={500}
+                  color={linkColor}
+                  _hover={{
+                    textDecoration: '',
+                    color: linkHoverColor,
+                  }}
+                  >
+                  {navItem.label} 
+
+                  {navItem.children && <Icon
+                  color={'pink.400'} 
+                  w={5} 
+                  h={5} 
+                  as={ChevronDownIcon}
+                  />}
+                  
+                </Box>
+              </Stack>
             </PopoverTrigger>
 
             {navItem.children && (
