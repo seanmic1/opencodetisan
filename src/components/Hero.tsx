@@ -13,7 +13,7 @@ import {
 
 export default function Hero() {
   return (
-    <Container maxW={'5xl'}>
+    <Container maxW={'5xl'} pt={'4rem'}>
       <Stack
         textAlign={'center'}
         align={'center'}
