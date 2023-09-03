@@ -11,6 +11,8 @@ import {
   IconProps,
 } from '@chakra-ui/react'
 
+import {TriangleUpIcon} from '@chakra-ui/icons'
+
 export default function Hero() {
   return (
     <Container maxW={'5xl'} pt={'4rem'}>
@@ -20,31 +22,39 @@ export default function Hero() {
         spacing={{ base: 8, md: 10 }}
         py={{ base: 20, md: 28 }}>
         <Heading
-          fontWeight={600}
-          fontSize={{ base: '3xl', sm: '4xl', md: '6xl' }}
+          fontWeight={800}
+          fontSize={{ base: '4rem', sm: '5rem', md: '6rem' }}
           lineHeight={'110%'}>
-          Meeting scheduling{' '}
-          <Text as={'span'} color={'orange.400'}>
-            made easy
-          </Text>
+          <Stack direction={{base: 'column', sm: 'column', md:'row'}}>
+            <Text>
+              Develop.
+            </Text>
+            <Text>
+              Preview.
+            </Text>
+            <Text>
+              Ship.
+            </Text>
+          </Stack>
         </Heading>
-        <Text color={'gray.500'} maxW={'3xl'}>
-          Never miss a meeting. Never be late for one too. Keep track of your meetings and
-          receive smart reminders in appropriate times. Read your smart “Daily Agenda”
-          every morning.
+        <Text color={'#888'} maxW={'3xl'} fontSize={'1.25rem'} fontWeight={'400'}>
+        Vercel's frontend cloud gives developers the frameworks, workflows, and infrastructure to build a faster, more personalized Web.
         </Text>
         <Stack spacing={6} direction={'row'}>
           <Button
-            rounded={'full'}
-            px={6}
+            rounded={'md'}
+            px={3}
             colorScheme={'orange'}
-            bg={'orange.400'}
-            _hover={{ bg: 'orange.500' }}>
-            Get started
+            bg={'white'}
+            _hover={{ bg: 'gray.200' }}
+            leftIcon={<TriangleUpIcon/>}>
+            Start Deploying
           </Button>
-          <Button rounded={'full'} px={6}>
-            Learn more
-          </Button>
+          <Flex rounded={'md'} bgGradient={'linear(to-r, blue.400, cyan)'} p={'1px'}>
+            <Button rounded={'md'} px={6} bg={'black'} border={'transparent'}>
+              Get a Demo
+            </Button>
+          </Flex>
         </Stack>
       </Stack>
     </Container>
