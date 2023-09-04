@@ -1,5 +1,7 @@
-import { extendTheme, StyleFunctionProps, type ThemeConfig } from '@chakra-ui/react'
+import { extendTheme, StyleFunctionProps, type ThemeConfig, defineStyleConfig,  } from '@chakra-ui/react'
 import { mode } from "@chakra-ui/theme-tools";
+import { cardTheme } from '@/components/Card'
+
 
 const config: ThemeConfig = {
   initialColorMode: 'dark',
@@ -14,6 +16,9 @@ const theme = extendTheme({
         bg: mode('white','black')(props),
       }
     })
+  },
+  components: {
+    Card: cardTheme,
   },
 })
 
