@@ -28,6 +28,10 @@ import {
   chakra,
   VisuallyHidden,
   Center,
+  calc,
+  Input,
+  InputLeftAddon,
+  InputGroup,
 } from '@chakra-ui/react'
 import {
   FiHome,
@@ -39,7 +43,8 @@ import {
   FiUsers,
   FiPlus,
   FiHelpCircle,
-  FiGrid
+  FiGrid,
+  FiSearch
 } from 'react-icons/fi'
 import {
   FaTwitter,
@@ -73,6 +78,9 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Dashboard', icon: FiHome },
   { name: 'Inbox', icon: FiInbox },
   { name: 'Contacts', icon: FiUsers },
+]
+
+const LinkItemsBottom: Array<LinkItemProps> = [
   { name: 'Invite people', icon: FiPlus },
   { name: 'Help & support', icon: FiHelpCircle },
 ]
@@ -84,11 +92,11 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       bg={useColorModeValue('white', 'black')}
       borderRight="1px"
       borderRightColor={useColorModeValue('gray.200', 'gray.800')}
-      w={{ base: 'full', md: 60 }}
+      w={{ base: 'full', md: '280px' }}
       pos="fixed"
       h="full"
       {...rest}>
-      <Flex h="3rem" alignItems="center" mx="2" justifyContent="space-between">
+      <Flex h="60px" alignItems="center" mx="2" justifyContent="space-between">
         {/* add organizations and profile image button */}
         <Button bgColor={useColorModeValue('white','black')} _hover={{ bg: 'gray.900' }} px={3} size={'sm'}>
           <Flex rounded={'full'} bgGradient="linear(to-r, blue.400, cyan)" p={'1px'}>
@@ -127,11 +135,30 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
             </Portal>
           </Menu>
       </Flex>
-      {LinkItems.map((link) => (
+      <Flex p={4}>
+        <InputGroup>
+          <InputLeftAddon h={'2em'} >
+            <FiSearch></FiSearch>
+          </InputLeftAddon>
+          <Input placeholder='Search' h={'2em'}>
+          </Input>
+        </InputGroup>
+      </Flex>
+      <Flex direction={'column'} height={'calc(100% - 150px)'}>
+      {
+      LinkItems.map((link) => (
         <NavItem key={link.name} icon={link.icon}>
           {link.name}
         </NavItem>
       ))}
+      <Spacer></Spacer>
+      {
+      LinkItemsBottom.map((link) => (
+        <NavItem key={link.name} icon={link.icon}>
+          {link.name}
+        </NavItem>
+      ))}
+      </Flex>
     </Box>
   )
 }
@@ -145,8 +172,9 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
       _focus={{ boxShadow: 'none' }}>
       <Flex
         align="center"
-        p="4"
-        mx="4"
+        p="2"
+        mx="5"
+        mt="2"
         borderRadius="lg"
         role="group"
         cursor="pointer"
@@ -205,7 +233,7 @@ const SocialButton = ({
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   return (
     <Flex
-      ml={{ base: 0, md: 60 }}
+      ml={{ base: 0, md: '280px' }}
       px={{ base: 4, md: 4 }}
       height="60px"
       alignItems="center"
@@ -242,7 +270,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
             </SocialButton>
           </Stack>
         </Flex>
-        <Button variant={'solid'}>
+        <Button variant={'solid'} mx={2}>
           Buy Pro
         </Button>
       </HStack>
