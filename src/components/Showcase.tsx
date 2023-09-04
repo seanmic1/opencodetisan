@@ -7,31 +7,31 @@ import { SiUnderarmour } from 'react-icons/si'
 
 export default function Showcase() {
 
-  const logoSize = '100'
+  const logoSize = '80'
 
   return(
     <>
-      <Text align={'center'} m={2} width={'100%'}>
+      <Text 
+        align={'center'} 
+        m={2} 
+        width={'100%'} 
+        casing={"uppercase"} 
+        color={'gray.400'} 
+        fontWeight={700} 
+        letterSpacing={'0.2rem'}
+        fontSize={'0.75rem'}>
         Trusted by the best frontend teams
       </Text>
-      <Center m={3}>
-        <Stack direction={'row'} spacing={10} alignItems={'center'}>
-          <Flex >
+      <Center m={3} mb={10}>
+        <Stack direction={{base:'column', sm:'column', md:'row'}} spacing={10} alignItems={'center'}>
+          <Flex gap={10}>
             <AiFillApple size={logoSize} />
-          </Flex>
-          <Flex>
             <AiFillGoogleCircle size={logoSize} />
-          </Flex>
-          <Flex>
             <BiLogoAdobe size={logoSize} />
           </Flex>
-          <Flex>
+          <Flex gap={10}>
             <BiLogoEbay size={logoSize} />
-          </Flex>
-          <Flex>
             <BiLogoTailwindCss size={logoSize} />
-          </Flex>
-          <Flex>
             <SiUnderarmour size={logoSize} />
           </Flex>
         </Stack>
