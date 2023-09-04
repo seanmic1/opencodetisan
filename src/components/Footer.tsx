@@ -28,7 +28,7 @@ const Logo = (props: any) => {
 
 const ListHeader = ({ children }: { children: ReactNode }) => {
   return (
-    <Text fontWeight={'500'} fontSize={'lg'} mb={2}>
+    <Text fontWeight={'500'} fontSize={'lg'} mb={2} color={useColorModeValue('black', 'white')}>
       {children}
     </Text>
   )
@@ -37,8 +37,10 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
 export default function Footer() {
   return (
     <Box
-      bg={useColorModeValue('gray.50', 'gray.900')}
-      color={useColorModeValue('gray.700', 'gray.200')}>
+      bg={useColorModeValue('white', 'black')}
+      color={useColorModeValue('gray.700', 'gray.500')}
+      borderTopColor={'gray.800'}
+      borderWidth={'1px'}>
       <Container as={Stack} maxW={'6xl'} py={10}>
         <SimpleGrid
           templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr 1fr 1fr' }}
