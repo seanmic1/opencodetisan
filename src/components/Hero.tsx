@@ -42,6 +42,8 @@ export default function Hero() {
         </Text>
         <Stack spacing={6} direction={'row'}>
           <Button
+            as={'a'}
+            href='/dashboard'
             rounded={'md'}
             px={3}
             colorScheme={'orange'}
