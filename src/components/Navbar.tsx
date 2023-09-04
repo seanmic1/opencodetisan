@@ -27,7 +27,7 @@ export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure()
 
   return (
-    <Box position={'fixed'} w={'100%'} as='header'>
+    <Box position={'fixed'} w={'100%'} as='header' zIndex={'overlay'}>
       <Flex
         bg={useColorModeValue('white', 'black')}
         color={useColorModeValue('gray.600', 'white')}
@@ -38,7 +38,6 @@ export default function Navbar() {
         borderStyle={'solid'}
         borderColor={useColorModeValue('white', 'black')}
         align={'center'}
-        zIndex={'200'}
         background={'rgba(0, 0, 0, 0.44)'}
         boxShadow={'0 4px 30px rgba(0, 0, 0, 0.1)'}
         backdropFilter={'blur(5px)'}
