@@ -38,6 +38,32 @@ export const writeSessionReplay = async ({
   return writePath
 }
 
+// ORIGINAL CODE
+// export const readSessionReplay = async ({
+//   userId,
+//   assessmentQuizSubId,
+// }: {
+//   userId: string
+//   assessmentQuizSubId: string
+// }) => {
+//   if (!userId) {
+//     throw Error('missing userId')
+//   } else if (!assessmentQuizSubId) {
+//     throw Error('missing assessmentQuizSubId')
+//   }
+//   const sessionReplay = []
+//   const files = await glob(`src/session/${userId}/${assessmentQuizSubId}_*`)
+//   for (let i = 1; i <= files.length; i++) {
+//     const readPath = `./src/session/${userId}/${assessmentQuizSubId}_${i}`
+//     const buf = await readFile(readPath)
+//     const decompressed = decompressSync(buf)
+//     const json = JSON.parse(strFromU8(decompressed))
+//     sessionReplay.push(...json)
+//   }
+//   return sessionReplay
+// }
+
+// MY CODE
 export const readSessionReplay = async ({
   userId,
   assessmentQuizSubId,
@@ -50,17 +76,42 @@ export const readSessionReplay = async ({
   } else if (!assessmentQuizSubId) {
     throw Error('missing assessmentQuizSubId')
   }
-  const sessionReplay = []
+  const sessionReplay: any[] = []
   const files = await glob(`src/session/${userId}/${assessmentQuizSubId}_*`)
+
+  // array of promises
+  const promises = [];
+
   for (let i = 1; i <= files.length; i++) {
-    const readPath = `./src/session/${userId}/${assessmentQuizSubId}_${i}`
-    const buf = await readFile(readPath)
-    const decompressed = decompressSync(buf)
-    const json = JSON.parse(strFromU8(decompressed))
-    sessionReplay.push(...json)
+  const readPath = `./src/session/${userId}/${assessmentQuizSubId}_${i}`
+  const readFilePromise = readFile(readPath)
+    .then(buf => {
+      const decompressed = decompressSync(buf)
+      return JSON.parse(strFromU8(decompressed))
+    })
+    .catch(err => {
+      // Handle errors here (e.g., log or handle individually)
+      console.error(`Error processing file ${readPath}: ${err.message}`)
+      return []; // Return an empty array to avoid breaking the code
+    })
+
+    promises.push(readFilePromise);
   }
+
+  // Use Promise.all to parallelize file processing and error handling
+  try {
+    const jsonResults = await Promise.all(promises)
+    sessionReplay.push(...jsonResults.flat())
+  } catch (error) {
+    // Handle any errors that occurred during file processing
+    console.error(`Error processing files: ${error}`)
+  }
+
   return sessionReplay
+
 }
+
+
 
 export const getAssessmentPoints = async () => {
   let object: IAssessmentPointsProps = {}
