@@ -15,6 +15,7 @@ import {
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
+  ColorModeContext,
 } from '@chakra-ui/react'
 import {
   HamburgerIcon,
@@ -22,6 +23,7 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from '@chakra-ui/icons'
+import ColorModeButton from './ColorModeButton'
 
 export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure()
@@ -29,17 +31,15 @@ export default function Navbar() {
   return (
     <Box position={'fixed'} w={'100%'} as='header' zIndex={'overlay'}>
       <Flex
-        bg={useColorModeValue('white', 'black')}
         color={useColorModeValue('gray.600', 'white')}
         minH={'60px'}
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
-        borderStyle={'solid'}
         borderColor={useColorModeValue('white', 'black')}
         align={'center'}
-        background={'rgba(0, 0, 0, 0.44)'}
-        boxShadow={'0 4px 30px rgba(0, 0, 0, 0.1)'}
+        bg={useColorModeValue('#ffffff70', '#00000070')}
+        boxShadow={useColorModeValue('0 4px 30px rgba(0, 0, 0, 0.1)','0 4px 30px rgba(255, 255, 255, 0.2)')}
         backdropFilter={'blur(5px)'}
         style={{
           WebkitBackdropFilter : 'blur(5px)'
@@ -57,8 +57,11 @@ export default function Navbar() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          <Flex height={'auto'} width={'100px'} justify={{ base: 'center', md: 'start' }}>
+          <Flex height={'auto'} width={'100px'} justify={{ base: 'center', md: 'start' }} hidden={useColorModeValue(true,false)}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" viewBox="0 0 300 50"><path d="M141.68 16.25c-11.04 0-19 7.2-19 18s8.96 18 20 18c6.67 0 12.55-2.64 16.19-7.09l-7.65-4.42c-2.02 2.21-5.09 3.5-8.54 3.5-4.79 0-8.86-2.5-10.37-6.5h28.02c.22-1.12.35-2.28.35-3.5 0-10.79-7.96-17.99-19-17.99zm-9.46 14.5c1.25-3.99 4.67-6.5 9.45-6.5 4.79 0 8.21 2.51 9.45 6.5h-18.9zm117.14-14.5c-11.04 0-19 7.2-19 18s8.96 18 20 18c6.67 0 12.55-2.64 16.19-7.09l-7.65-4.42c-2.02 2.21-5.09 3.5-8.54 3.5-4.79 0-8.86-2.5-10.37-6.5h28.02c.22-1.12.35-2.28.35-3.5 0-10.79-7.96-17.99-19-17.99zm-9.45 14.5c1.25-3.99 4.67-6.5 9.45-6.5 4.79 0 8.21 2.51 9.45 6.5h-18.9zm-39.03 3.5c0 6 3.92 10 10 10 4.12 0 7.21-1.87 8.8-4.92l7.68 4.43c-3.18 5.3-9.14 8.49-16.48 8.49-11.05 0-19-7.2-19-18s7.96-18 19-18c7.34 0 13.29 3.19 16.48 8.49l-7.68 4.43c-1.59-3.05-4.68-4.92-8.8-4.92-6.07 0-10 4-10 10zm82.48-29v46h-9v-46h9zM37.59.25l36.95 64H.64l36.95-64zm92.38 5l-27.71 48-27.71-48h10.39l17.32 30 17.32-30h10.39zm58.91 12v9.69c-1-.29-2.06-.49-3.2-.49-5.81 0-10 4-10 10v14.8h-9v-34h9v9.2c0-5.08 5.91-9.2 13.2-9.2z" /></svg>
+          </Flex>
+          <Flex height={'auto'} width={'100px'} justify={{ base: 'center', md: 'start' }} hidden={useColorModeValue(false,true)}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" viewBox="0 0 300 50"><path d="M141.68 16.25c-11.04 0-19 7.2-19 18s8.96 18 20 18c6.67 0 12.55-2.64 16.19-7.09l-7.65-4.42c-2.02 2.21-5.09 3.5-8.54 3.5-4.79 0-8.86-2.5-10.37-6.5h28.02c.22-1.12.35-2.28.35-3.5 0-10.79-7.96-17.99-19-17.99zm-9.46 14.5c1.25-3.99 4.67-6.5 9.45-6.5 4.79 0 8.21 2.51 9.45 6.5h-18.9zm117.14-14.5c-11.04 0-19 7.2-19 18s8.96 18 20 18c6.67 0 12.55-2.64 16.19-7.09l-7.65-4.42c-2.02 2.21-5.09 3.5-8.54 3.5-4.79 0-8.86-2.5-10.37-6.5h28.02c.22-1.12.35-2.28.35-3.5 0-10.79-7.96-17.99-19-17.99zm-9.45 14.5c1.25-3.99 4.67-6.5 9.45-6.5 4.79 0 8.21 2.51 9.45 6.5h-18.9zm-39.03 3.5c0 6 3.92 10 10 10 4.12 0 7.21-1.87 8.8-4.92l7.68 4.43c-3.18 5.3-9.14 8.49-16.48 8.49-11.05 0-19-7.2-19-18s7.96-18 19-18c7.34 0 13.29 3.19 16.48 8.49l-7.68 4.43c-1.59-3.05-4.68-4.92-8.8-4.92-6.07 0-10 4-10 10zm82.48-29v46h-9v-46h9zM37.59.25l36.95 64H.64l36.95-64zm92.38 5l-27.71 48-27.71-48h10.39l17.32 30 17.32-30h10.39zm58.91 12v9.69c-1-.29-2.06-.49-3.2-.49-5.81 0-10 4-10 10v14.8h-9v-34h9v9.2c0-5.08 5.91-9.2 13.2-9.2z" /></svg>
           </Flex>
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
             <DesktopNav />
@@ -70,6 +73,7 @@ export default function Navbar() {
           justify={'flex-end'}
           direction={'row'}
           spacing={6}>
+          <ColorModeButton></ColorModeButton>
           <Button as={'a'} fontSize={'sm'} fontWeight={400} variant={'link'} href={'#'}>
             Sign In
           </Button>
@@ -78,8 +82,8 @@ export default function Navbar() {
             display={{ base: 'none', md: 'inline-flex' }}
             fontSize={'sm'}
             fontWeight={600}
-            color={'white'}
-            bg={'pink.400'}
+            color={useColorModeValue('white','black')}
+            bg={useColorModeValue('black','white')}
             href={'#'}
             _hover={{
               bg: 'pink.300',
@@ -99,7 +103,7 @@ export default function Navbar() {
 const DesktopNav = () => {
   const linkColor = useColorModeValue('gray.600', 'gray.400')
   const linkHoverColor = useColorModeValue('gray.800', 'white')
-  const popoverContentBgColor = useColorModeValue('white', 'gray.800')
+  const popoverContentBgColor = useColorModeValue('white', 'black')
 
   return (
     <Stack direction={'row'} spacing={4}>
@@ -124,7 +128,7 @@ const DesktopNav = () => {
                   {navItem.label} 
 
                   {navItem.children && <Icon
-                  color={'pink.400'} 
+                  color={useColorModeValue('black','white')} 
                   w={5} 
                   h={5} 
                   as={ChevronDownIcon}
@@ -139,6 +143,7 @@ const DesktopNav = () => {
                 border={0}
                 boxShadow={'xl'}
                 bg={popoverContentBgColor}
+                color= {linkColor}
                 p={4}
                 rounded={'xl'}
                 minW={'sm'}>
@@ -165,12 +170,12 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
       display={'block'}
       p={2}
       rounded={'md'}
-      _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
+      _hover={{ bg: useColorModeValue('black', 'gray.900') }}>
       <Stack direction={'row'} align={'center'}>
         <Box>
           <Text
             transition={'all .3s ease'}
-            _groupHover={{ color: 'pink.400' }}
+            _groupHover={{ color: useColorModeValue('black','white') }}
             fontWeight={500}>
             {label}
           </Text>
@@ -184,7 +189,7 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
           justify={'flex-end'}
           align={'center'}
           flex={1}>
-          <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
+          <Icon color={useColorModeValue('black','white')} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
     </Box>
