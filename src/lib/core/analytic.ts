@@ -79,9 +79,10 @@ export const readSessionReplay = async ({
   const sessionReplay: any[] = []
   const files = await glob(`src/session/${userId}/${assessmentQuizSubId}_*`)
 
-  // array of promises
+  // Make array of promises
   const promises = [];
 
+  // Read files asynchronously
   for (let i = 1; i <= files.length; i++) {
   const readPath = `./src/session/${userId}/${assessmentQuizSubId}_${i}`
   const readFilePromise = readFile(readPath)
