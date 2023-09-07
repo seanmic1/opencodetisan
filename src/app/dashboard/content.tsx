@@ -1,10 +1,12 @@
-import {Box, BoxProps, Card, CardBody, CardHeader, Center, Container, Flex, SimpleGrid, Text} from '@chakra-ui/react'
+import {Box, BoxProps, Card, CardBody, CardHeader, Center, Container, Flex, Menu, MenuItem, SimpleGrid, Text} from '@chakra-ui/react'
 
 import {BsGraphUpArrow} from 'react-icons/bs'
 
+import LineChart from '@/components/LineChart'
+
 export default function Content() {
   return (
-    <Center px={'10%'} pt={'10px'} width={'100%'} display={'block'}>
+    <Center px={'10%'} pt={'10px'} height={'100%'} width={'100%'} display={'block'}>
         <SimpleGrid columns={{sm:2, md: 4}} spacing={'4'} width={'100%'}>
           <Card p={4} >
             <Text fontSize={'sm'} fontWeight={'md'}>
@@ -63,15 +65,11 @@ export default function Content() {
             </Flex>
           </Card>
         </SimpleGrid>
-        <Card p={4} my={4}>
-          <Text fontSize={'sm'} fontWeight={'md'}>
+        <Card p={5} my={4}>
+          <Text fontSize={'sm'} fontWeight={'md'} p={1}>
             Monthly recurring revenue
           </Text>
-          <Center height={'250px'} bg={'gray.800'} m={2}>
-            <Text>
-              *Insert chart here*
-            </Text>
-          </Center>
+          <LineChart></LineChart>
         </Card>
     </Center>
   )
