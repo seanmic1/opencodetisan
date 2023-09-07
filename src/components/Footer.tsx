@@ -10,6 +10,7 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react'
+import { SiVercel } from 'react-icons/si'
 
 const Logo = (props: any) => {
   return (
@@ -47,9 +48,9 @@ export default function Footer() {
           spacing={8}>
           <Stack spacing={6}>
             <Box>
-              <Logo color={useColorModeValue('gray.700', 'white')} />
+              <SiVercel color={useColorModeValue('black', 'white')} />
             </Box>
-            <Text fontSize={'sm'}>© 2022 Chakra Templates. All rights reserved</Text>
+            <Text fontSize={'sm'}>© 2023</Text>
           </Stack>
           <Stack align={'flex-start'}>
             <ListHeader>Product</ListHeader>
