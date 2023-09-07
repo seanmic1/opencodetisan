@@ -32,6 +32,7 @@ import {
   Input,
   InputLeftAddon,
   InputGroup,
+  useColorMode,
 } from '@chakra-ui/react'
 import {
   FiHome,
@@ -85,7 +86,9 @@ const LinkItemsBottom: Array<LinkItemProps> = [
   { name: 'Help & support', icon: FiHelpCircle },
 ]
 
+
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+  const { colorMode, toggleColorMode } = useColorMode()
   return (
     <Box
       transition="3s ease"
@@ -98,9 +101,9 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       {...rest}>
       <Flex h="60px" alignItems="center" mx="2" justifyContent="space-between">
         {/* add organizations and profile image button */}
-        <Button bgColor={useColorModeValue('white','black')} _hover={{ bg: 'gray.900' }} px={3} size={'sm'}>
+        <Button bgColor={useColorModeValue('white','black')} _hover={{bg: useColorModeValue('gray.100', 'gray.900')}} px={3} size={'sm'}>
           <Flex rounded={'full'} bgGradient="linear(to-r, blue.400, cyan)" p={'1px'}>
-            <Center p={1} rounded={'full'} bg={'black'} border={'transparent'}>
+            <Center p={1} rounded={'full'} bg={useColorModeValue('white','black')} border={'transparent'}>
               <FiGrid/>
             </Center>
           </Flex>
@@ -128,7 +131,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
                 <MenuItem>Changelog</MenuItem>
                 <MenuItem>Help</MenuItem>
                 <MenuItem>Feedback</MenuItem>
-                <MenuItem>Light mode</MenuItem>
+                <MenuItem onClick={toggleColorMode}>{colorMode === 'light' ? 'Dark' : 'Light'} mode</MenuItem>
                 <MenuDivider />
                 <MenuItem>Log out</MenuItem>
               </MenuList>
@@ -235,14 +238,17 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
     <Flex
       ml={{ base: 0, md: '280px' }}
       px={{ base: 4, md: 4 }}
+      pr={{base: 4, md: '280px' }}
       height="60px"
+      width={'full'}
       alignItems="center"
       bg={useColorModeValue('white', 'black')}
       borderBottomWidth="1px"
       borderBottomColor={useColorModeValue('gray.200', 'gray.800')}
-      justifyContent={{ base: 'space-between', md: 'flex-end' }}
+      justifyContent={{ base: 'space-between', md: 'flex-start' }}
+      position={'fixed'}
+      zIndex={'overlay'}
       {...rest}>
-
       <IconButton
         display={{ base: 'flex', md: 'none' }}
         onClick={onOpen}
@@ -254,8 +260,8 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         Sean
       </Text>
       
-      <Spacer></Spacer>
-      
+      <Spacer />
+
       <HStack spacing={{ base: '0', md: '6' }}>
         <Flex alignItems={'center'}>
         <Stack direction={'row'} spacing={6}>
@@ -282,7 +288,7 @@ const SidebarWithHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
-    <Box minH="100vh" bg={useColorModeValue('gray.100', 'black')}>
+    <Box minH="100vh" width={'100%'} bg={useColorModeValue('white', 'black')}>
       <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
       <Drawer
         isOpen={isOpen}
@@ -295,9 +301,9 @@ const SidebarWithHeader = () => {
           <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
-      {/* mobilenav */}
-      <MobileNav onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p="4">
+        {/* mobilenav */}
+        <MobileNav onOpen={onOpen} />
+      <Box ml={{ base: 0, md: 60 }} p="4" pt={'60px'}>
         {/* desktopnav */}
         <Content></Content>
       </Box>
